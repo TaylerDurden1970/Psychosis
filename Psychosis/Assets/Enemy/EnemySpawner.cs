@@ -24,22 +24,25 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(stats.Prefab, hit.position, Quaternion.identity);
             newEnemy.transform.parent = transform;
-            newEnemy.GetComponent<Enemy>().Initialize(stats);
-            newEnemy.GetComponent<Enemy>().isStatic = Random.Range(0,2);
+            //enemies.Add(newEnemy);
+            GetComponent<WaveManager>().RegisterEnemy(newEnemy);
 
-            Enemy enemyAI = newEnemy.GetComponent<Enemy>();
-            if (enemyAI != null)
+            Enemy enemy = newEnemy.GetComponent<Enemy>();
+            enemy.Initialize(stats);
+            enemy.isStatic = Random.Range(0,2);
+
+            if (enemy != null)
             {
-                enemyAI.player = player;
+                enemy.player = player;
             }
-            enemies.Add(newEnemy);
+            
         }
     }
 
     Vector3 GetRandomPointAroundPlayer()
     {
         float angle = Random.Range(0f, 360f);
-        float distance = Random.Range(25f, spawnRadius);
+        float distance = Random.Range(3f, spawnRadius);
 
         Vector3 spawnOffset = new Vector3(Mathf.Cos(angle) * distance, 0, Mathf.Sin(angle) * distance);
         return player.position + spawnOffset;

@@ -372,11 +372,15 @@
 "Assets/Enemy/WaveData.cs"
 "Assets/Enemy/WaveManager.cs"
 "Assets/GameController.cs"
+"Assets/GameManager.cs"
+"Assets/GameState.cs"
 "Assets/ObjectPool.cs"
 "Assets/PlayerController.cs"
 "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/MouseLook.cs"
 "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PlayerMovement.cs"
 "Assets/Projectile.cs"
+"Assets/SafeZoneGate.cs"
+"Assets/SafeZoneTrigger.cs"
 "Assets/Shooter.cs"
 -langversion:9.0
 

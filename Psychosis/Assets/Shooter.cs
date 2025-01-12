@@ -9,7 +9,7 @@ public class Shooter : MonoBehaviour
     public float searchRadius = 20f;    // Радиус поиска врагов
 
     private float nextShootTime = 0f;
-    public EnemySpawner enemySpawner; 
+    public WaveManager waveManager; 
     private ObjectPool projectilePool;
 
     public int damage;
@@ -48,10 +48,10 @@ public class Shooter : MonoBehaviour
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in enemySpawner.enemies)
+        foreach (GameObject enemy in waveManager.activeEnemies)
         {
             if (enemy == null) continue;
-            if (enemy.GetComponent<EnemyHealth>().currentHealth <= 0) continue;
+            if (enemy.GetComponent<Enemy>().currentHealth <= 0) continue;
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
             if (distance < shortestDistance && distance <= searchRadius)
             {

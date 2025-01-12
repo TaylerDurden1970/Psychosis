@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+
+/// <summary>
+/// Removed
+/// </summary>
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;

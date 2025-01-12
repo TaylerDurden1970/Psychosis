@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,13 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public event Action<GameObject> OnEnemyDeath;
+
     public Transform player;
     public string EnemyName { get; private set; }
     public int Health { get; private set; }
+
+    public int currentHealth;
     public int Damage { get; private set; }
     public float Speed { get; private set; }
 
@@ -29,6 +34,7 @@ public class Enemy : MonoBehaviour
     {
         EnemyName = stats.Name;
         Health = stats.Health;
+        currentHealth = Health;
         Damage = stats.Damage;
         Speed = stats.Speed;
         
@@ -59,5 +65,25 @@ public class Enemy : MonoBehaviour
 
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.Play("SkeletonDeath");
+        GetComponent<Enemy>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        OnEnemyDeath?.Invoke(gameObject);
+        Destroy(gameObject);
     }
 }
