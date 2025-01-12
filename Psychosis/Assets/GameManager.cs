@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public void StartWave()
     {
         WaveManager.StartWave();
+        UIController.instance.ShowWaveInfo("Wave starts!");
     }
 
     public bool AreAllEnemiesDefeated()
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         // Когда игрок покидает безопасную зону, закрываем ворота
         safeZoneGate.CloseGate();
         isInSafeZone = false;
-
+        
         // Начинаем новую волну
         StartWave();
     }
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         // Остановить спавн врагов
         WaveManager.StopSpawning();
-
+        UIController.instance.ShowWaveInfo("Wave compledet!");
         Debug.Log("Wave completed! Safe zone is now open.");
     }
 }

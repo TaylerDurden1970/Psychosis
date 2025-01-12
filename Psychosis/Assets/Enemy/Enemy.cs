@@ -53,17 +53,28 @@ public class Enemy : MonoBehaviour
 
         animator.SetFloat("Speed", agent.velocity.magnitude);
 
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
         if (isStatic == 0)
             agent.SetDestination(player.position);
         else
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             if (distanceToPlayer <= attackRange)
             {
                 agent.SetDestination(player.position);
 
             }
+        }
+
+        if (distanceToPlayer <= 1f)
+        {
+            Debug.Log("Shas Yeby");
+            animator.SetFloat("Atack", 1);
+        }
+        else
+        {
+            animator.SetFloat("Atack", 0);
         }
     }
 
@@ -85,5 +96,10 @@ public class Enemy : MonoBehaviour
         GetComponent<NavMeshAgent>().enabled = false;
         OnEnemyDeath?.Invoke(gameObject);
         Destroy(gameObject);
+    }
+
+    public void DealDamage()
+    {
+        player.GetComponent<PlayerController>().TakeDamage(Damage);
     }
 }

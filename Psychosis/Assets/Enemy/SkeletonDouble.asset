@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SkeletonDouble
   Health: 200
-  Damage: 20
+  Damage: 10
   Speed: 2
   Prefab: {fileID: 7629512427596919622, guid: dacecd87f94f4e848aeaf84b167999eb, type: 3}

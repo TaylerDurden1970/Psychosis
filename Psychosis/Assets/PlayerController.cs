@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public int maxHealth;
+    public int currentHealth;
+
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
@@ -14,6 +17,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("NavMeshAgent не найден на объекте!");
         }
+
+        currentHealth = maxHealth;
+
+        UIController.instance.OverrideHealthFiller(currentHealth,maxHealth);
     }
 
     void Update()
@@ -30,5 +37,23 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Speed",speed);
         animator.SetBool("isMoving", speed > 0.1f);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        UIController.instance.OverrideHealthFiller(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("GG");
+        Animator animator = GetComponent<Animator>();
+        //animator.Play("SkeletonDeath");
     }
 }
