@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public event Action<GameObject> OnEnemyDeath;
 
     public Transform player;
+
+    public GameObject itemDrop;
     public string EnemyName { get; private set; }
     public int Health { get; private set; }
 
@@ -90,7 +92,9 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        
         Animator animator = GetComponent<Animator>();
+        Instantiate(itemDrop, new Vector3(transform.position.x, transform.position.y+1, transform.position.z), Quaternion.identity);
         animator.Play("SkeletonDeath");
         GetComponent<Enemy>().enabled = false;
         GetComponent<NavMeshAgent>().enabled = false;

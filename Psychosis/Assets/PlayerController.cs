@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public int maxHealth;
     public int currentHealth;
+    public int maxXP = 10;
+    public int currentXP = 0;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
 
         UIController.instance.OverrideHealthFiller(currentHealth,maxHealth);
+        XPChange();
     }
 
     void Update()
@@ -39,6 +42,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isMoving", speed > 0.1f);
     }
 
+    public void XPChange()
+    {
+        Debug.Log("Trigger pulled!!!!!!! Current XP = " + currentXP.ToString());
+        currentXP = UIController.instance.OverrideXPFiller(currentXP, maxXP);
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -47,6 +56,15 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("XPItem"))
+        {
+            Destroy(other.gameObject);
+            XPChange();
         }
     }
 
