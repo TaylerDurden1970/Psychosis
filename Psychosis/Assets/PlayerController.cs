@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
 
     public void XPChange()
     {
-        Debug.Log("Trigger pulled!!!!!!! Current XP = " + currentXP.ToString());
         currentXP = UIController.instance.OverrideXPFiller(currentXP, maxXP);
     }
 
@@ -63,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("XPItem"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             XPChange();
         }
     }

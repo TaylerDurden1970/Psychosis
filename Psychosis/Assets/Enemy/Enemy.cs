@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public Transform player;
 
-    public GameObject itemDrop;
+    //public GameObject xpItemPrefab;
     public string EnemyName { get; private set; }
     public int Health { get; private set; }
 
@@ -94,7 +94,9 @@ public class Enemy : MonoBehaviour
     {
         
         Animator animator = GetComponent<Animator>();
-        Instantiate(itemDrop, new Vector3(transform.position.x, transform.position.y+1, transform.position.z), Quaternion.identity);
+        //xpItemPrefab.transform.position = transform.position;
+        //xpItemPrefab.transform.rotation = transform.rotation;
+        //Instantiate(itemDrop, new Vector3(transform.position.x, transform.position.y+1, transform.position.z), Quaternion.identity);
         animator.Play("SkeletonDeath");
         GetComponent<Enemy>().enabled = false;
         GetComponent<NavMeshAgent>().enabled = false;
